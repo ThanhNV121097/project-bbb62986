@@ -37,6 +37,8 @@ Current codes:
 
 Health endpoint for Compose and runtime. Returns 200 only after migrations have succeeded and `SELECT 1` against PostgreSQL works.
 
+Auth: none.
+
 Request body: none.
 
 Success `200 text/plain`:
@@ -51,6 +53,8 @@ Errors: `500` with error envelope when database is not ready.
 
 Returns singleton displayed text for Hello Word page.
 
+Auth: none.
+
 Request body: none.
 
 Success `200 application/json`:
@@ -63,7 +67,15 @@ Success `200 application/json`:
 
 | Field | Type | Notes |
 |---|---|---|
-| `displayText` | string | Exact `page_messages.display_text` value. |
+| `displayText` | string | Exact `page_messages.display_text` value. Matches reviewed UI mock `HelloWordResponse.displayText`. |
+
+Frontend mock contract:
+
+```ts
+export type HelloWordResponse = {
+  displayText: string;
+};
+```
 
 Errors:
 
@@ -71,3 +83,20 @@ Errors:
 |---|---|---|
 | 405 | `method_not_allowed` | Method other than GET. |
 | 500 | `internal_error` | Row missing or database read fails. |
+
+## Migration plan
+
+### Forward
+
+1. Create `page_messages` table per ERD.
+2. Seed singleton row `id = 1`, `display_text = 'Hello Word'`.
+3. Backend `GET /v1/message` reads `display_text` from `page_messages` where `id = 1` and returns `{ "displayText": value }`.
+
+### Backward
+
+1. Remove `GET /v1/message` backend route with its query.
+2. Drop `page_messages` table if rolling schema back with code.
+
+### Safety on populated tables
+
+Safe for initial empty database. On populated database, route addition is safe. Table creation is safe only when table name is unused. Seed is safe only when `id = 1` is absent; otherwise migration must fail rather than replace existing displayed text silently.
