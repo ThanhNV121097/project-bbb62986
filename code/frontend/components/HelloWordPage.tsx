@@ -1,5 +1,5 @@
-import styles from "@/components/HelloWordPage.module.css";
-import { helloWordMock } from "@/lib/mock/render-hello-word-page";
+import styles from "./HelloWordPage.module.css";
+import { helloWordMock } from "../lib/mock/render-hello-word-page";
 
 export function HelloWordPage() {
   return (
