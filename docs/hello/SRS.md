@@ -5,17 +5,11 @@ Last updated: 2025-02-14
 Design: [View the approved design](http://localhost:8080/design/bbb62986-4fbc-4e49-8e40-4029fe136b75)
 Design system: `design/design-system.md`
 
-> One file per module, at `docs/{module}/SRS.md`. It covers only the functions
-> that belong to this module. Never write `docs/SRS.md`.
-
 ## 1. Purpose
 
-This module shows one plain landing page for `hello-word-17`. It proves the
-end-to-end pipeline works by reading displayed text from backend data instead of
-hardcoding it in the frontend.
+This module shows one plain landing page for `hello-word-17`. It proves the end-to-end pipeline works by reading displayed text from backend data instead of hardcoding it in the frontend.
 
-If it does not exist, the project has no visible proof that the backend, data
-store, and frontend are connected.
+If it does not exist, the project has no visible proof that the backend, data store, and frontend are connected.
 
 ## 2. Actors
 
@@ -42,8 +36,7 @@ store, and frontend are connected.
 
 **Requirement HELLO-001 — Read displayed text from stored data**
 
-*As a* Guest, *I want to* load the page and see the text value that is stored for
-this product, *so that* the page proves the display is driven by persisted data.
+*As a* Guest, *I want to* load the page and see the text value that is stored for this product, *so that* the page proves the display is driven by persisted data.
 
 Behaviour:
 
@@ -53,8 +46,7 @@ Behaviour:
 
 **Requirement HELLO-002 — Center text on plain white screen**
 
-*As a* Guest, *I want to* see the text centered horizontally and vertically on a
-plain white screen, *so that* the page matches the approved minimal design.
+*As a* Guest, *I want to* see the text centered horizontally and vertically on a plain white screen, *so that* the page matches the approved minimal design.
 
 Behaviour:
 
@@ -63,9 +55,7 @@ Behaviour:
 3. The text appears in black.
 4. No extra content, controls, navigation, or motion appears on the screen.
 
-**Acceptance criteria** — each maps one-to-one onto a test case in
-`docs/hello/test-cases/render-hello-word-page.md`. Given/When/Then, no compound
-conditions: one behaviour per criterion.
+**Acceptance criteria** — each maps one-to-one onto a test case in `docs/hello/test-cases/render-hello-word-page.md`. Given/When/Then, no compound conditions: one behaviour per criterion.
 
 | # | Given | When | Then |
 |---|---|---|---|
@@ -75,18 +65,17 @@ conditions: one behaviour per criterion.
 | AC-4 | Page loads successfully | Guest views page | Background is white and text is black |
 | AC-5 | Page loads successfully | Guest views page | No extra UI, motion, or secondary content appears |
 
-**Failure, boundary and permission behaviour** — the part most often skipped
-and most often the source of bugs.
+**Failure, boundary and permission behaviour** — the part most often skipped and most often the source of bugs.
 
 | Case | Condition | Expected behaviour |
 |---|---|---|
 | Not applicable | Single public read only; no user roles, writes, or alternate states shown in approved design | Not applicable: approved design shows one successful screen only. Error or empty state is not part of the design; API error handling belongs in service contract and backend review. |
 | Data missing | Stored text row is absent | Not applicable for this module scope; the project brief defines one stored row and the approved design does not show an empty state. |
 | Upstream failure | Backend cannot read stored text | Not applicable in approved design; user-facing error state is not shown. Backend failure handling is specified by TL service design. |
+| Loading state | Page request is in progress | Not applicable: approved design shows no loading state. |
 
 **Data touched** — the fields this function reads and writes, in product terms.
-The physical schema is TL's job in `docs/architecture/erd.md`; this is the list
-that document has to satisfy.
+The physical schema is TL's job in `docs/architecture/erd.md`; this is the list that document has to satisfy.
 
 | Field | Type | Required | Rule |
 |---|---|---|---|
@@ -94,9 +83,7 @@ that document has to satisfy.
 
 ## 5. Screens
 
-The design is the source of truth for appearance; this section maps functions
-onto it so nothing in the design is unaccounted for and nothing specified here
-is missing from the design.
+The design is the source of truth for appearance; this section maps functions onto it so nothing in the design is unaccounted for and nothing specified here is missing from the design.
 
 | Screen | Section in the design | Functions it serves | States that must exist |
 |---|---|---|---|
@@ -104,8 +91,7 @@ is missing from the design.
 
 ## 6. Non-functional requirements
 
-Only what is real for this module. Delete rows that do not apply rather than
-inventing a number nobody will check.
+Only what is real for this module. Delete rows that do not apply rather than inventing a number nobody will check.
 
 | Area | Requirement |
 |---|---|
@@ -126,8 +112,7 @@ inventing a number nobody will check.
 
 ## 8. Traceability
 
-Every plan item in this module appears exactly once, and every requirement id
-traces to a test case. A gap in this table is a gap in the build.
+Every plan item in this module appears exactly once, and every requirement id traces to a test case. A gap in this table is a gap in the build.
 
 | Plan item | Requirement ids | Test cases |
 |---|---|---|
